@@ -295,7 +295,7 @@ function HomePage({
     ? searchContent.filter((c) => c.title.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 8)
     : []
 
-  const whatsappUrl = `https://wa.me/${(SITE_CONFIG.whatsapp || '').replace(/\D/g, '') || '919849146903'}`
+  const whatsappUrl = `https://wa.me/${(SITE_CONFIG.whatsapp || '').replace(/\D/g, '') || '918121046903'}`
 
   return (
     <>
