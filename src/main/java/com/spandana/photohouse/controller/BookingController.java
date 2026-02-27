@@ -2,6 +2,7 @@ package com.spandana.photohouse.controller;
 
 import com.spandana.photohouse.model.Booking;
 import com.spandana.photohouse.repository.BookingRepository;
+import com.spandana.photohouse.service.NotificationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,11 @@ import java.util.Map;
 public class BookingController {
 
     private final BookingRepository bookingRepository;
+    private final NotificationService notificationService;
 
-    public BookingController(BookingRepository bookingRepository) {
+    public BookingController(BookingRepository bookingRepository, NotificationService notificationService) {
         this.bookingRepository = bookingRepository;
+        this.notificationService = notificationService;
     }
 
     @PostMapping("/booking")
@@ -42,7 +45,10 @@ public class BookingController {
         }
 
         Booking booking = new Booking(name, email, phone, eventType, packageType, preferredDate, notes);
+        booking.setPaymentStatus("NONE");
         bookingRepository.save(booking);
+
+        notificationService.sendBookingNotifications(booking);
 
         return ResponseEntity.ok(Map.of("success", true));
     }

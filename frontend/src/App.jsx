@@ -9,6 +9,10 @@ import {
   fetchAdminRatings,
   fetchAdminContacts,
   fetchAdminBookings,
+  fetchGoogleReviews,
+  fetchPaymentConfig,
+  createPaymentOrder,
+  verifyPayment,
 } from './api'
 import './styles.css'
 
@@ -85,6 +89,7 @@ function MainLayout({ children, theme, setTheme, searchOpen, setSearchOpen, mobi
             <li><a href="#ratings" onClick={handleNavClick}>Ratings</a></li>
             <li><a href="#process" onClick={handleNavClick}>Process</a></li>
             <li><a href="#testimonials" onClick={handleNavClick}>Testimonials</a></li>
+            <li><a href="#google-reviews" onClick={handleNavClick}>Reviews</a></li>
             <li><a href="#pricing" onClick={handleNavClick}>Packages</a></li>
             <li><a href="#booking" onClick={handleNavClick}>Book</a></li>
             <li><a href="#faq" onClick={handleNavClick}>FAQ</a></li>
@@ -136,6 +141,9 @@ function HomePage({
   const [ratingSubmitting, setRatingSubmitting] = useState(false)
   const [contactSubmitting, setContactSubmitting] = useState(false)
   const [bookingSubmitting, setBookingSubmitting] = useState(false)
+  const [googleReviews, setGoogleReviews] = useState({ reviews: [], configured: false })
+  const [paymentConfig, setPaymentConfig] = useState({ enabled: false })
+  const [payWithAdvance, setPayWithAdvance] = useState(false)
   const [testimonialIndex, setTestimonialIndex] = useState(0)
   const [faqOpen, setFaqOpen] = useState(null)
   const [portfolioFilter, setPortfolioFilter] = useState('all')
@@ -171,6 +179,12 @@ function HomePage({
   const filteredPortfolio = portfolioFilter === 'all'
     ? portfolioItems
     : portfolioItems.filter((p) => p.category === portfolioFilter)
+
+  // Fetch Google Reviews + Payment config
+  useEffect(() => {
+    fetchGoogleReviews().then(setGoogleReviews)
+    fetchPaymentConfig().then(setPaymentConfig)
+  }, [])
 
   // Lightbox body scroll lock
   useEffect(() => {
@@ -255,6 +269,20 @@ function HomePage({
     }
   }
 
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      if (document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]')) {
+        resolve(true)
+        return
+      }
+      const script = document.createElement('script')
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js'
+      script.onload = () => resolve(true)
+      script.onerror = () => resolve(false)
+      document.body.appendChild(script)
+    })
+  }
+
   const handleBookingSubmit = async (e) => {
     e.preventDefault()
     const form = e.target
@@ -274,14 +302,67 @@ function HomePage({
       notes: form.notes?.value?.trim() || '',
     }
     if (!data.name || !data.email || !data.eventType) return
-    setBookingSubmitting(true)
-    const result = await submitBooking(data)
-    setBookingSubmitting(false)
-    if (result.success) {
-      showToast('Booking request received! We\'ll contact you within 24 hours.')
-      form.reset()
+
+    if (payWithAdvance && paymentConfig.enabled) {
+      setBookingSubmitting(true)
+      const orderResult = await createPaymentOrder(data)
+      if (orderResult.error) {
+        showToast(orderResult.error)
+        setBookingSubmitting(false)
+        return
+      }
+
+      const loaded = await loadRazorpayScript()
+      if (!loaded) {
+        showToast('Payment gateway could not load. Please try again.')
+        setBookingSubmitting(false)
+        return
+      }
+
+      const options = {
+        key: orderResult.keyId,
+        amount: orderResult.amount,
+        currency: orderResult.currency,
+        name: SITE_CONFIG.studioName,
+        description: `Advance Booking — ${data.eventType}`,
+        order_id: orderResult.orderId,
+        prefill: { name: data.name, email: data.email, contact: data.phone ? `+91${data.phone}` : '' },
+        theme: { color: '#c9a227' },
+        handler: async function (response) {
+          const verifyResult = await verifyPayment({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            ...data,
+          })
+          setBookingSubmitting(false)
+          if (verifyResult.success) {
+            showToast('Payment successful! Booking confirmed. Check your email for details.')
+            form.reset()
+            setPayWithAdvance(false)
+          } else {
+            showToast(verifyResult.error || 'Payment verification failed.')
+          }
+        },
+        modal: {
+          ondismiss: function () {
+            setBookingSubmitting(false)
+            showToast('Payment cancelled.')
+          },
+        },
+      }
+      const rzp = new window.Razorpay(options)
+      rzp.open()
     } else {
-      showToast(result.error || 'Could not submit. Please try again.')
+      setBookingSubmitting(true)
+      const result = await submitBooking(data)
+      setBookingSubmitting(false)
+      if (result.success) {
+        showToast('Booking request received! We\'ll contact you within 24 hours. Check your email for confirmation.')
+        form.reset()
+      } else {
+        showToast(result.error || 'Could not submit. Please try again.')
+      }
     }
   }
 
@@ -650,6 +731,55 @@ function HomePage({
           </div>
         </section>
 
+        {/* Google Reviews */}
+        {googleReviews.configured && googleReviews.reviews && googleReviews.reviews.length > 0 && (
+          <section id="google-reviews" className="section" style={{ background: 'var(--color-bg-elevated)' }}>
+            <div className="container">
+              <span className="section-eyebrow">Google Reviews</span>
+              <h2>What People Say on <em>Google</em></h2>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center', marginBottom: 'var(--space-lg)' }}>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/120px-Google_2015_logo.svg.png" alt="Google" style={{ height: 28 }} />
+                {googleReviews.overallRating > 0 && (
+                  <span style={{ fontSize: '1.4rem', fontWeight: 700 }}>
+                    {googleReviews.overallRating.toFixed(1)} <StarsDisplay avg={googleReviews.overallRating} />
+                    <span style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', marginLeft: 8 }}>
+                      ({googleReviews.totalRatings} reviews)
+                    </span>
+                  </span>
+                )}
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 'var(--space-lg)' }}>
+                {googleReviews.reviews.map((r, i) => (
+                  <div key={i} style={{
+                    background: 'var(--color-bg-card)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 8,
+                    padding: 'var(--space-lg)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 12,
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      {r.profilePhoto && <img src={r.profilePhoto} alt="" style={{ width: 40, height: 40, borderRadius: '50%' }} />}
+                      <div>
+                        <strong style={{ display: 'block' }}>{r.authorName}</strong>
+                        <small style={{ color: 'var(--color-text-muted)' }}>{r.relativeTime}</small>
+                      </div>
+                    </div>
+                    <div style={{ color: '#c9a227' }}>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</div>
+                    {r.text && <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.6, margin: 0 }}>"{r.text}"</p>}
+                  </div>
+                ))}
+              </div>
+              <div style={{ textAlign: 'center', marginTop: 'var(--space-lg)' }}>
+                <a href="https://www.google.com/maps/place/Spandana+Photo+House/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                  <i className="fab fa-google" style={{ marginRight: 8 }} />View All Google Reviews
+                </a>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Booking */}
         <section id="booking" className="section booking-section">
           <div className="container">
@@ -681,8 +811,32 @@ function HomePage({
                 <input type="date" name="preferredDate" placeholder="Preferred date" min={new Date().toISOString().split('T')[0]} />
               </div>
               <textarea name="notes" rows={3} placeholder="Additional details (venue, number of guests, special requests...)" />
+
+              {paymentConfig.enabled && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'var(--color-bg-elevated)', borderRadius: 4, border: '1px solid var(--color-border)', margin: '8px 0' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', flex: 1 }}>
+                    <input type="checkbox" checked={payWithAdvance} onChange={(e) => setPayWithAdvance(e.target.checked)} style={{ width: 18, height: 18, accentColor: '#c9a227' }} />
+                    <span>
+                      <strong>Pay ₹{paymentConfig.advanceAmount?.toLocaleString('en-IN')} advance</strong>
+                      <small style={{ display: 'block', color: 'var(--color-text-muted)' }}>Secure your slot with online payment (UPI, Cards, Net Banking)</small>
+                    </span>
+                  </label>
+                  <span style={{ display: 'flex', gap: 6 }}>
+                    <i className="fab fa-cc-visa" style={{ fontSize: 22, opacity: 0.6 }} />
+                    <i className="fab fa-cc-mastercard" style={{ fontSize: 22, opacity: 0.6 }} />
+                    <i className="fab fa-google-pay" style={{ fontSize: 22, opacity: 0.6 }} />
+                  </span>
+                </div>
+              )}
+
               <button type="submit" className="btn btn-primary btn-full" disabled={bookingSubmitting}>
-                <span className="btn-text">{bookingSubmitting ? <><i className="fas fa-spinner fa-spin" /> Submitting...</> : 'Request Booking'}</span>
+                <span className="btn-text">
+                  {bookingSubmitting
+                    ? <><i className="fas fa-spinner fa-spin" /> Processing...</>
+                    : payWithAdvance
+                      ? <><i className="fas fa-lock" style={{ marginRight: 6 }} />Pay ₹{paymentConfig.advanceAmount?.toLocaleString('en-IN')} &amp; Book</>
+                      : 'Request Booking'}
+                </span>
               </button>
             </form>
           </div>
@@ -962,11 +1116,11 @@ function AdminPage() {
 
   const exportCsv = () => {
     const data = activeTab === 'ratings' ? ratings : activeTab === 'contacts' ? contacts : bookings
-    const headers = activeTab === 'ratings' ? ['Date', 'Stars', 'Name', 'Review'] : activeTab === 'contacts' ? ['Date', 'Name', 'Email', 'Phone', 'Message'] : ['Date', 'Name', 'Email', 'Event', 'Package', 'Preferred Date', 'Notes']
+    const headers = activeTab === 'ratings' ? ['Date', 'Stars', 'Name', 'Review'] : activeTab === 'contacts' ? ['Date', 'Name', 'Email', 'Phone', 'Message'] : ['Date', 'Name', 'Email', 'Event', 'Package', 'Preferred Date', 'Payment', 'Payment ID', 'Notes']
     const rows = data.map((row) => {
       if (activeTab === 'ratings') return [new Date(row.createdAt).toLocaleString(), '★'.repeat(row.stars), row.clientName || '-', row.reviewText || '-']
       if (activeTab === 'contacts') return [new Date(row.createdAt).toLocaleString(), row.name, row.email, row.phone || '-', row.message]
-      return [new Date(row.createdAt).toLocaleString(), row.name, row.email, row.eventType, row.packageType || '-', row.preferredDate || '-', row.notes || '-']
+      return [new Date(row.createdAt).toLocaleString(), row.name, row.email, row.eventType, row.packageType || '-', row.preferredDate || '-', row.paymentStatus || 'NONE', row.razorpayPaymentId || '-', row.notes || '-']
     })
     const csv = [headers.join(','), ...rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(','))].join('\n')
     const a = document.createElement('a')
@@ -1034,10 +1188,10 @@ function AdminPage() {
       {activeTab === 'bookings' && (
         <div>
           <table className="admin-table" style={{ width: '100%', borderCollapse: 'collapse', background: 'var(--color-bg-card)', borderRadius: 4, overflow: 'hidden' }}>
-            <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Event</th><th>Package</th><th>Preferred Date</th><th>Notes</th></tr></thead>
+            <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Event</th><th>Package</th><th>Preferred Date</th><th>Payment</th><th>Notes</th></tr></thead>
             <tbody>
-              {bookings.length === 0 ? <tr><td colSpan={7} style={{ padding: 'var(--space-xl)', textAlign: 'center', color: 'var(--color-text-muted)' }}>No bookings yet.</td></tr> : bookings.map((b, i) => (
-                <tr key={i}><td>{new Date(b.createdAt).toLocaleString()}</td><td>{b.name}</td><td>{b.email}</td><td>{b.eventType}</td><td>{b.packageType || '-'}</td><td>{b.preferredDate || '-'}</td><td>{b.notes || '-'}</td></tr>
+              {bookings.length === 0 ? <tr><td colSpan={8} style={{ padding: 'var(--space-xl)', textAlign: 'center', color: 'var(--color-text-muted)' }}>No bookings yet.</td></tr> : bookings.map((b, i) => (
+                <tr key={i}><td>{new Date(b.createdAt).toLocaleString()}</td><td>{b.name}</td><td>{b.email}</td><td>{b.eventType}</td><td>{b.packageType || '-'}</td><td>{b.preferredDate || '-'}</td><td><span style={{ padding: '2px 8px', borderRadius: 4, fontSize: '0.8em', fontWeight: 600, background: b.paymentStatus === 'PAID' ? '#22c55e' : b.paymentStatus === 'NONE' ? '#6b7280' : '#eab308', color: '#fff' }}>{b.paymentStatus || 'NONE'}</span>{b.razorpayPaymentId ? <small style={{ display: 'block', color: 'var(--color-text-muted)', marginTop: 2 }}>{b.razorpayPaymentId}</small> : null}</td><td>{b.notes || '-'}</td></tr>
               ))}
             </tbody>
           </table>
