@@ -5,6 +5,19 @@ plugins {
     id 'jacoco'
 }
 
+// Build React frontend before processResources
+// Run "cd frontend && npm run build" manually if Gradle build fails (npm not in PATH)
+def frontendDir = file('frontend')
+tasks.register('buildFrontend', Exec) {
+    workingDir frontendDir
+    commandLine System.getProperty('os.name').toLowerCase().contains('windows') ? ['cmd', '/c', 'npm', 'run', 'build'] : ['npm', 'run', 'build']
+    onlyIf { frontendDir.exists() && file('frontend/package.json').exists() }
+    ignoreExitValue = false
+}
+tasks.named('processResources') {
+    dependsOn buildFrontend
+}
+
 // Build outside OneDrive to avoid file-lock issues on Windows
 buildDir = file("${System.getProperty('user.home')}/.gradle/builds/${rootProject.name}")
 

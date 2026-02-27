@@ -56,6 +56,6 @@ const SITE_CONFIG = {
     instagram: 'https://instagram.com/spandana_photo_house',
     twitter: 'https://twitter.com/spandana_photo',
     pinterest: 'https://pinterest.com/spandana_photo',
-    googleMapsEmbed: 'https://maps.google.com/maps?q=Ongole,+Andhra+Pradesh&t=&z=14&ie=UTF8&iwloc=&output=embed',  // Ongole, A.P. - update with exact Mastan Durga Center location when available
+    googleMapsEmbed: 'https://maps.google.com/maps?q=15.5056421,80.0498062&z=17&output=embed',  // Spandana Photo House - exact coordinates
     adminPassword: 'admin123'           // Change for production!
 };
