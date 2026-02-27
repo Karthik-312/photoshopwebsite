@@ -258,10 +258,16 @@ function HomePage({
   const handleBookingSubmit = async (e) => {
     e.preventDefault()
     const form = e.target
+    const phoneRaw = form.phone?.value?.trim() || ''
+    const phoneDigits = phoneRaw.replace(/\D/g, '')
+    if (phoneRaw && phoneDigits.length !== 10) {
+      showToast('Please enter a valid 10-digit phone number.')
+      return
+    }
     const data = {
       name: form.name.value.trim(),
       email: form.email.value.trim(),
-      phone: form.phone?.value?.trim() || '',
+      phone: phoneDigits || '',
       eventType: form.eventType.value,
       packageType: form.package?.value || '',
       preferredDate: form.preferredDate?.value || '',
@@ -654,7 +660,7 @@ function HomePage({
               <div className="booking-row">
                 <input type="text" name="name" placeholder="Your Name" required />
                 <input type="email" name="email" placeholder="Email" required />
-                <input type="tel" name="phone" placeholder="Phone" />
+                <input type="tel" name="phone" placeholder="Phone (10 digits)" pattern="[0-9]{10}" title="Please enter exactly 10 digits" maxLength={10} />
               </div>
               <div className="booking-row">
                 <select name="eventType" required>
@@ -672,7 +678,7 @@ function HomePage({
                   <option value="portrait">Portrait Studio (₹7,999)</option>
                   <option value="wedding">Wedding & Events (₹25,999+)</option>
                 </select>
-                <input type="date" name="preferredDate" placeholder="Preferred date" />
+                <input type="date" name="preferredDate" placeholder="Preferred date" min={new Date().toISOString().split('T')[0]} />
               </div>
               <textarea name="notes" rows={3} placeholder="Additional details (venue, number of guests, special requests...)" />
               <button type="submit" className="btn btn-primary btn-full" disabled={bookingSubmitting}>
