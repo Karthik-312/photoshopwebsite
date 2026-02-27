@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spandana.photohouse.repository.RatingRepositoryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-27T06:00:17" hostname="KARTHIKEYASPC" time="0.067">
+  <properties/>
+  <testcase name="findAllByOrderByCreatedAtDesc_returnsInCorrectOrder()" classname="com.spandana.photohouse.repository.RatingRepositoryTest" time="0.038"/>
+  <testcase name="findAllByOrderByCreatedAtDesc_emptyRepository_returnsEmptyList()" classname="com.spandana.photohouse.repository.RatingRepositoryTest" time="0.013"/>
+  <testcase name="save_rating_persistsCorrectly()" classname="com.spandana.photohouse.repository.RatingRepositoryTest" time="0.012"/>
+  <system-out><![CDATA[2026-02-27T11:30:17.100+05:30  INFO 23480 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.spandana.photohouse.repository.RatingRepositoryTest]: RatingRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-27T11:30:17.125+05:30  INFO 23480 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.spandana.photohouse.PhotoHouseApplication for test class com.spandana.photohouse.repository.RatingRepositoryTest
+Hibernate: insert into ratings (client_name,created_at,review_text,stars,id) values (?,?,?,?,default)
+Hibernate: insert into ratings (client_name,created_at,review_text,stars,id) values (?,?,?,?,default)
+Hibernate: insert into ratings (client_name,created_at,review_text,stars,id) values (?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.client_name,r1_0.created_at,r1_0.review_text,r1_0.stars from ratings r1_0 order by r1_0.created_at desc
+Hibernate: select r1_0.id,r1_0.client_name,r1_0.created_at,r1_0.review_text,r1_0.stars from ratings r1_0 order by r1_0.created_at desc
+Hibernate: insert into ratings (client_name,created_at,review_text,stars,id) values (?,?,?,?,default)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

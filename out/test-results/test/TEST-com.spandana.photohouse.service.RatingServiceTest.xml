@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spandana.photohouse.service.RatingServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-02-27T06:00:17" hostname="KARTHIKEYASPC" time="0.16">
+  <properties/>
+  <testcase name="getRatingStats_withNoRatings_returnsEmptyStats()" classname="com.spandana.photohouse.service.RatingServiceTest" time="0.127"/>
+  <testcase name="getRatingStats_withRatings_returnsCorrectStats()" classname="com.spandana.photohouse.service.RatingServiceTest" time="0.005"/>
+  <testcase name="saveRating_returnsSavedRating()" classname="com.spandana.photohouse.service.RatingServiceTest" time="0.013"/>
+  <testcase name="getRatingStats_limitsRecentRatingsTo10()" classname="com.spandana.photohouse.service.RatingServiceTest" time="0.004"/>
+  <testcase name="getRatingStats_withNullClientName_usesAnonymous()" classname="com.spandana.photohouse.service.RatingServiceTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

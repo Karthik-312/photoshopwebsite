@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RatingService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spandana-photo-house</a> &gt; <a href="index.source.html" class="el_package">com.spandana.photohouse.service</a> &gt; <span class="el_source">RatingService.java</span></div><h1>RatingService.java</h1><pre class="source lang-java linenums">package com.spandana.photohouse.service;
+
+import com.spandana.photohouse.model.Rating;
+import com.spandana.photohouse.repository.RatingRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Service
+public class RatingService {
+
+    private final RatingRepository ratingRepository;
+
+<span class="fc" id="L17">    public RatingService(RatingRepository ratingRepository) {</span>
+<span class="fc" id="L18">        this.ratingRepository = ratingRepository;</span>
+<span class="fc" id="L19">    }</span>
+
+    public Rating saveRating(Rating rating) {
+<span class="fc" id="L22">        return ratingRepository.save(rating);</span>
+    }
+
+    public Map&lt;String, Object&gt; getRatingStats() {
+<span class="fc" id="L26">        List&lt;Rating&gt; all = ratingRepository.findAllByOrderByCreatedAtDesc();</span>
+<span class="fc" id="L27">        int total = all.size();</span>
+
+<span class="fc" id="L29">        Map&lt;Integer, Integer&gt; distribution = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        for (int i = 1; i &lt;= 5; i++) {</span>
+<span class="fc" id="L31">            distribution.put(i, 0);</span>
+        }
+<span class="fc" id="L33">        double sum = 0;</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (Rating r : all) {</span>
+<span class="fc" id="L35">            distribution.merge(r.getStars(), 1, Integer::sum);</span>
+<span class="fc" id="L36">            sum += r.getStars();</span>
+<span class="fc" id="L37">        }</span>
+
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        double average = total &gt; 0 ? Math.round((sum / total) * 10.0) / 10.0 : 0;</span>
+
+<span class="fc" id="L41">        List&lt;Map&lt;String, Object&gt;&gt; recentRatings = all.stream()</span>
+<span class="fc" id="L42">                .limit(10)</span>
+<span class="fc" id="L43">                .map(r -&gt; Map.&lt;String, Object&gt;of(</span>
+<span class="fc" id="L44">                        &quot;stars&quot;, r.getStars(),</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">                        &quot;client_name&quot;, r.getClientName() != null ? r.getClientName() : &quot;Anonymous&quot;,</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                        &quot;review_text&quot;, r.getReviewText() != null ? r.getReviewText() : &quot;&quot;,</span>
+<span class="fc" id="L47">                        &quot;created_at&quot;, r.getCreatedAt().toString()</span>
+                ))
+<span class="fc" id="L49">                .collect(Collectors.toList());</span>
+
+<span class="fc" id="L51">        return Map.of(</span>
+<span class="fc" id="L52">                &quot;average&quot;, average,</span>
+<span class="fc" id="L53">                &quot;total&quot;, total,</span>
+                &quot;distribution&quot;, distribution,
+                &quot;recentRatings&quot;, recentRatings
+        );
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

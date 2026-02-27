@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spandana Photo House — Luxury Photography Studio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Premium Navigation -->
+    <header class="main-header" id="header">
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-accent">SPANDANA</span>
+                <span class="logo-main">PHOTO HOUSE</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#ratings">Ratings</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#pricing">Packages</a></li>
+                <li><a href="#booking">Book</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#booking" class="nav-cta">Book a Session</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="nav-search-btn" aria-label="Search" title="Search"><i class="fas fa-search"></i></button>
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                    <i class="fas fa-moon" data-icon-dark></i>
+                    <i class="fas fa-sun" data-icon-light style="display:none"></i>
+                </button>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-grain"></div>
+            <div class="hero-content">
+                <div class="hero-ratings-badge" id="hero-ratings-badge">
+                    <div class="hero-stars" id="hero-stars"></div>
+                    <span class="hero-rating-text"><strong id="hero-rating-avg">—</strong>/5 · <span class="review-count" id="hero-review-count">0</span> Reviews</span>
+                </div>
+                <p class="hero-eyebrow">30+ Years of Experience — Over 2000+ Events Captured</p>
+                <h1 class="hero-title">
+                    <span class="hero-line">Where Moments</span>
+                    <span class="hero-line hero-line-accent">Become Timeless</span>
+                </h1>
+                <p class="hero-subtitle">Luxury photography for weddings, portraits, and life's most precious occasions. Crafted with artistry, delivered with care.</p>
+                <div class="hero-ctas">
+                    <a href="#portfolio" class="btn btn-primary">View Our Work</a>
+                    <a href="#contact" class="btn btn-outline">Schedule Consultation</a>
+                </div>
+            </div>
+            <div class="hero-scroll-indicator">
+                <span>Scroll to Explore</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
+
+        <!-- Trust Bar / Client Logos Marquee -->
+        <section class="trust-marquee">
+            <div class="marquee-track">
+                <div class="marquee-content" id="marquee-content-1">
+                    <span>2000+ Events Captured</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-satisfaction">—% Satisfaction Rate</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-rating">—★ Rated</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>30+ Years in Photography</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-reviews">0 Verified Reviews</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>2000+ Events Captured</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-satisfaction-2">—% Satisfaction Rate</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-rating-2">—★ Rated</span>
+                </div>
+                <div class="marquee-content" aria-hidden="true" id="marquee-content-2">
+                    <span>2000+ Events Captured</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-satisfaction-copy">—% Satisfaction Rate</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-rating-copy">—★ Rated</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>30+ Years in Photography</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-reviews-copy">0 Verified Reviews</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>2000+ Events Captured</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-satisfaction-copy2">—% Satisfaction Rate</span>
+                    <span class="marquee-dot">◆</span>
+                    <span id="marquee-rating-copy2">—★ Rated</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="stats-bar">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="30">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Years of Excellence</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="2000">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Events Captured</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="0">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Photos Captured</span>
+                    </div>
+                    <div class="stat-item" id="stat-satisfaction">
+                        <span class="stat-number" id="stat-satisfaction-value">—</span><span class="stat-suffix">%</span>
+                        <span class="stat-label">Client Satisfaction</span>
+                    </div>
+                    <div class="stat-item stat-item-highlight" id="stat-rating">
+                        <span class="stat-number" id="stat-rating-value">—</span><span class="stat-suffix">/5</span>
+                        <span class="stat-label">Average Rating</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Satisfaction & Ratings Section -->
+        <section id="ratings" class="section ratings-section">
+            <div class="ratings-bg-pattern"></div>
+            <div class="container">
+                <div class="ratings-layout">
+                    <div class="ratings-summary">
+                        <span class="section-eyebrow">Client Satisfaction</span>
+                        <h2>Rated <em>Excellence</em> by Our Clients</h2>
+                        <p class="ratings-intro">Our commitment to quality has earned us exceptional ratings. Rate your experience below—your feedback helps others.</p>
+                        <div class="rating-overview">
+                            <div class="rating-score">
+                                <span class="rating-number" id="rating-display-avg">—</span>
+                                <div class="rating-stars-large" id="rating-display-stars"></div>
+                                <span class="rating-total">Based on <strong id="rating-display-total">0</strong> verified reviews</span>
+                            </div>
+                        </div>
+                        <!-- Database Setup (shown when not configured) -->
+                        <div class="db-setup-box" id="db-setup-box" style="display:none">
+                            <h4><i class="fas fa-database"></i> Setup Database (One-time)</h4>
+                            <p class="db-setup-desc">To store ratings for all visitors, create a free <a href="https://supabase.com" target="_blank">Supabase</a> account. Paste your credentials below. <strong>For shared links:</strong> Also add them to <code>config.js</code> before deploying.</p>
+                            <form id="db-setup-form" class="db-setup-form">
+                                <input type="url" id="db-url" placeholder="Supabase Project URL (e.g. https://xxx.supabase.co)" required>
+                                <input type="text" id="db-key" placeholder="Supabase Anon Key" required>
+                                <button type="submit" class="btn btn-primary">Save & Connect</button>
+                            </form>
+                            <p class="db-setup-note">Run the SQL in <code>database-setup.sql</code> in Supabase SQL Editor first.</p>
+                        </div>
+                        <!-- Rating Form -->
+                        <div class="rating-form-box">
+                            <h4>Rate Your Experience</h4>
+                            <form id="rating-form" class="rating-form">
+                                <div class="rating-stars-input">
+                                    <span class="star-label">Your rating:</span>
+                                    <div class="star-buttons">
+                                        <button type="button" class="star-btn" data-value="1" aria-label="1 star"><i class="far fa-star"></i></button>
+                                        <button type="button" class="star-btn" data-value="2" aria-label="2 stars"><i class="far fa-star"></i></button>
+                                        <button type="button" class="star-btn" data-value="3" aria-label="3 stars"><i class="far fa-star"></i></button>
+                                        <button type="button" class="star-btn" data-value="4" aria-label="4 stars"><i class="far fa-star"></i></button>
+                                        <button type="button" class="star-btn" data-value="5" aria-label="5 stars"><i class="far fa-star"></i></button>
+                                    </div>
+                                    <input type="hidden" name="stars" id="rating-stars-input" value="" required>
+                                </div>
+                                <input type="text" name="name" placeholder="Your name (optional)" id="rating-name">
+                                <textarea name="review" placeholder="Share your experience (optional)" id="rating-review" rows="2"></textarea>
+                                <button type="submit" class="btn btn-primary" id="rating-submit-btn">Submit Rating</button>
+                            </form>
+                            <p class="rating-form-note" id="rating-form-message"></p>
+                            <p class="rating-form-setup" id="rating-setup-link" style="display:none"><button type="button" class="btn-link" id="btn-show-setup">Setup Database</button> to enable rating storage.</p>
+                        </div>
+                    </div>
+                    <div class="ratings-breakdown">
+                        <h4>Rating Distribution</h4>
+                        <div class="rating-bar-item" data-stars="5">
+                            <span class="bar-label">5 Stars</span>
+                            <div class="bar-track"><div class="bar-fill" data-width="0"></div></div>
+                            <span class="bar-value" data-bar-value>0%</span>
+                        </div>
+                        <div class="rating-bar-item" data-stars="4">
+                            <span class="bar-label">4 Stars</span>
+                            <div class="bar-track"><div class="bar-fill" data-width="0"></div></div>
+                            <span class="bar-value" data-bar-value>0%</span>
+                        </div>
+                        <div class="rating-bar-item" data-stars="3">
+                            <span class="bar-label">3 Stars</span>
+                            <div class="bar-track"><div class="bar-fill" data-width="0"></div></div>
+                            <span class="bar-value" data-bar-value>0%</span>
+                        </div>
+                        <div class="rating-bar-item" data-stars="2">
+                            <span class="bar-label">2 Stars</span>
+                            <div class="bar-track"><div class="bar-fill" data-width="0"></div></div>
+                            <span class="bar-value" data-bar-value>0%</span>
+                        </div>
+                        <div class="rating-bar-item" data-stars="1">
+                            <span class="bar-label">1 Star</span>
+                            <div class="bar-track"><div class="bar-fill" data-width="0"></div></div>
+                            <span class="bar-value" data-bar-value>0%</span>
+                        </div>
+                        <div class="recent-ratings" id="recent-ratings">
+                            <h4>Recent Reviews</h4>
+                            <div id="recent-ratings-list">
+                                <p class="no-ratings-yet">No ratings yet. Be the first to rate!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <div class="about-container">
+                    <div class="about-image">
+                        <div class="about-image-frame">
+                            <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80" alt="Spandana Photo House Studio" loading="lazy">
+                            <div class="about-image-badge">
+                                <span>30+</span>
+                                <small>Years</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <span class="section-eyebrow">Our Story</span>
+                        <h2>Preserving Memories with <em>Artistry & Heart</em></h2>
+                        <p class="about-lead">
+                            Spandana Photo House, led by D. VenkataRao (Artist & Photographer) and D.S. Jyothi Kumar, has been a cornerstone of our community for over 30 years, capturing more than 2000 events. We believe a photograph is more than an image—it's a memory, a feeling, a piece of history frozen in time.
+                        </p>
+                        <p>
+                            Our mission is to create stunning, lasting imagery that you and your family will treasure for generations. Every frame we capture is crafted with meticulous attention to detail and a deep understanding of what makes moments truly special.
+                        </p>
+                        <div class="about-signature">
+                            <span class="signature-text">— D. VenkataRao & D.S. Jyothi Kumar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section services-section">
+            <div class="container">
+                <span class="section-eyebrow">What We Offer</span>
+                <h2>Expert Services, <em>Exceptional Results</em></h2>
+                <p class="section-subtitle">From intimate portraits to grand celebrations, we deliver excellence across every category.</p>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-camera-retro"></i></div>
+                        <h3>Event Photography</h3>
+                        <p>Weddings, birthdays, corporate events—we capture every special moment with a professional, artistic touch that stands the test of time.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-id-card-alt"></i></div>
+                        <h3>Passport & Visa Photos</h3>
+                        <p>Quick, fully compliant, and impeccably lit—high-quality photos for all your official documents. No hassle, no delays.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-edit"></i></div>
+                        <h3>Photo Restoration</h3>
+                        <p>Bring cherished, damaged photographs back to life. Our expert digital restoration preserves your family legacy with stunning clarity.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-print"></i></div>
+                        <h3>Professional Printing</h3>
+                        <p>From intimate prints to gallery-quality canvases. Premium archival paper ensures vibrant, museum-grade results that last lifetimes.</p>
+                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Before/After Restoration Showcase -->
+        <section class="section before-after-section">
+            <div class="container">
+                <span class="section-eyebrow">Photo Restoration</span>
+                <h2>See the <em>Transformation</em></h2>
+                <p class="section-subtitle">Our restoration experts bring damaged memories back to life. Drag to compare.</p>
+                <div class="before-after-container">
+                    <div class="before-after-slider">
+                        <div class="before-after-image before-img">
+                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80" alt="Before restoration" loading="lazy">
+                            <span class="ba-label">Before</span>
+                        </div>
+                        <div class="before-after-image after-img">
+                            <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&q=80" alt="After restoration" loading="lazy">
+                            <span class="ba-label">After</span>
+                        </div>
+                        <div class="ba-handle">
+                            <div class="ba-handle-line"></div>
+                            <div class="ba-handle-circle"><i class="fas fa-arrows-alt-h"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section portfolio-section">
+            <div class="container">
+                <span class="section-eyebrow">Featured Work</span>
+                <h2>Our <em>Portfolio</em></h2>
+                <p class="section-subtitle">A curated glimpse into the moments we've had the privilege to capture.</p>
+                <div class="portfolio-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="wedding">Weddings</button>
+                    <button class="filter-btn" data-filter="portrait">Portraits</button>
+                    <button class="filter-btn" data-filter="event">Events</button>
+                </div>
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <div class="portfolio-item" data-category="portrait">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" alt="Portrait Photography" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Portrait</span><h4>Elegant Portrait</h4></div>
+                    </div>
+                    <div class="portfolio-item" data-category="wedding">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding Photography" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Wedding</span><h4>Wedding Day</h4></div>
+                    </div>
+                    <div class="portfolio-item" data-category="event">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" alt="Event Photography" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Event</span><h4>Corporate Event</h4></div>
+                    </div>
+                    <div class="portfolio-item" data-category="portrait">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Family Photography" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Portrait</span><h4>Family Portrait</h4></div>
+                    </div>
+                    <div class="portfolio-item" data-category="wedding">
+                        <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80" alt="Wedding Ceremony" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Wedding</span><h4>Ceremony</h4></div>
+                    </div>
+                    <div class="portfolio-item" data-category="event">
+                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80" alt="Celebration" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Event</span><h4>Celebration</h4></div>
+                    </div>
+                    <div class="portfolio-item" data-category="portrait">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c0cbcbb8e4?w=600&q=80" alt="Portrait" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Portrait</span><h4>Studio Portrait</h4></div>
+                    </div>
+                    <div class="portfolio-item" data-category="wedding">
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80" alt="Wedding" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Wedding</span><h4>Reception</h4></div>
+                    </div>
+                    <div class="portfolio-item" data-category="event">
+                        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815a?w=600&q=80" alt="Event" loading="lazy">
+                        <div class="portfolio-overlay"><span class="portfolio-category">Event</span><h4>Special Event</h4></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="section process-section">
+            <div class="container">
+                <span class="section-eyebrow">How We Work</span>
+                <h2>Our <em>Process</em></h2>
+                <div class="process-timeline">
+                    <div class="process-step">
+                        <div class="process-number">01</div>
+                        <h3>Consultation</h3>
+                        <p>We discuss your vision, preferences, and timeline. Every project begins with understanding what matters most to you.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">02</div>
+                        <h3>Planning</h3>
+                        <p>We craft a tailored plan—locations, lighting, styling—ensuring every detail aligns with your expectations.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">03</div>
+                        <h3>Capture</h3>
+                        <p>On the day, we work with precision and artistry, capturing authentic moments and curated shots alike.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">04</div>
+                        <h3>Delivery</h3>
+                        <p>Your images are meticulously edited and delivered in your preferred format—prints, digital, or both.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section testimonials-section">
+            <div class="testimonials-bg"></div>
+            <div class="container">
+                <span class="section-eyebrow">Client Love</span>
+                <h2>What Our Clients <em>Say</em></h2>
+                <p class="section-subtitle">Join our satisfied families who trusted us with their precious moments.</p>
+                <div class="testimonial-carousel">
+                    <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+                    <div class="testimonial-slider">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <div class="testimonial-rating-badge">5.0</div>
+                        <p>"Spandana Photo House provided an extraordinary experience for our wedding. The photos are absolutely breathtaking—every frame tells a story. We couldn't be happier."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JD</div>
+                            <div><strong>Jane Doe</strong><span>Wedding Client</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <div class="testimonial-rating-badge">5.0</div>
+                        <p>"My passport photos were perfect on the first try. Fast, professional, and the team made the process effortless. Highly recommend for any official documentation needs."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JS</div>
+                            <div><strong>John Smith</strong><span>Documentation</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <div class="testimonial-rating-badge">5.0</div>
+                        <p>"They restored an old family photo I thought was beyond repair. The result brought tears to my eyes. True masters of their craft."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">EW</div>
+                            <div><strong>Emily White</strong><span>Restoration Client</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <div class="testimonial-rating-badge">5.0</div>
+                        <p>"Outstanding quality and professionalism. Our family portraits exceeded all expectations. Will definitely return for future occasions."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RK</div>
+                            <div><strong>Raj Kumar</strong><span>Family Portrait</span></div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="carousel-dots" id="carousel-dots"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="section booking-section">
+            <div class="container">
+                <span class="section-eyebrow">Reserve Your Session</span>
+                <h2>Book a <em>Consultation</em></h2>
+                <p class="section-subtitle">Tell us about your event and we'll get back to you within 24 hours.</p>
+                <form id="booking-form" class="booking-form">
+                    <div class="booking-row">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="tel" name="phone" placeholder="Phone">
+                    </div>
+                    <div class="booking-row">
+                        <select name="eventType" required>
+                            <option value="">Select event type</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="portrait">Portrait / Family</option>
+                            <option value="event">Corporate Event</option>
+                            <option value="passport">Passport / Visa</option>
+                            <option value="restoration">Photo Restoration</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <select name="package">
+                            <option value="">Select package (optional)</option>
+                            <option value="essential">Essential (₹2,999)</option>
+                            <option value="portrait">Portrait Studio (₹7,999)</option>
+                            <option value="wedding">Wedding & Events (₹25,999+)</option>
+                        </select>
+                        <input type="date" name="preferredDate" placeholder="Preferred date">
+                    </div>
+                    <textarea name="notes" rows="3" placeholder="Additional details (venue, number of guests, special requests...)"></textarea>
+                    <button type="submit" class="btn btn-primary btn-full" id="booking-submit-btn">
+                        <span class="btn-text">Request Booking</span>
+                        <span class="btn-loading" style="display:none"><i class="fas fa-spinner fa-spin"></i> Submitting...</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Pricing / Packages Section -->
+        <section id="pricing" class="section pricing-section">
+            <div class="container">
+                <span class="section-eyebrow">Packages</span>
+                <h2>Choose Your <em>Experience</em></h2>
+                <p class="section-subtitle">Flexible packages tailored to your needs. All include our signature quality guarantee.</p>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Essential</h3>
+                        <div class="pricing-amount"><span class="currency">₹</span><span class="price">2,999</span></div>
+                        <p class="pricing-desc">Perfect for passport photos & quick prints</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Passport/Visa photos</li>
+                            <li><i class="fas fa-check"></i> 4 printed copies</li>
+                            <li><i class="fas fa-check"></i> Digital copy included</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Get Started</a>
+                    </div>
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Most Popular</div>
+                        <h3>Portrait Studio</h3>
+                        <div class="pricing-amount"><span class="currency">₹</span><span class="price">7,999</span></div>
+                        <p class="pricing-desc">Professional portrait sessions</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 1-hour studio session</li>
+                            <li><i class="fas fa-check"></i> 15 edited digital photos</li>
+                            <li><i class="fas fa-check"></i> 5 premium prints</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Get Started</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Wedding & Events</h3>
+                        <div class="pricing-amount"><span class="currency">₹</span><span class="price">25,999</span><span class="price-note">+</span></div>
+                        <p class="pricing-desc">Full-day coverage for your big day</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Full-day coverage</li>
+                            <li><i class="fas fa-check"></i> 200+ edited photos</li>
+                            <li><i class="fas fa-check"></i> Album & prints</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards & Certifications -->
+        <section class="awards-section">
+            <div class="container">
+                <div class="awards-grid">
+                    <div class="award-item"><i class="fas fa-award"></i><span>30+ Years Excellence</span></div>
+                    <div class="award-item"><i class="fas fa-medal"></i><span>98% Satisfaction</span></div>
+                    <div class="award-item"><i class="fas fa-certificate"></i><span>Verified Reviews</span></div>
+                    <div class="award-item"><i class="fas fa-thumbs-up"></i><span>2000+ Events</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section faq-section">
+            <div class="container">
+                <span class="section-eyebrow">FAQ</span>
+                <h2>Common <em>Questions</em></h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question"><span>How far in advance should I book?</span><i class="fas fa-plus"></i></button>
+                        <div class="faq-answer"><p>We recommend booking at least 2-4 weeks in advance for portrait sessions, and 3-6 months for weddings and major events to secure your preferred date.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question"><span>Do you offer photo restoration services?</span><i class="fas fa-plus"></i></button>
+                        <div class="faq-answer"><p>Yes! Our expert restoration team can repair damaged, faded, or torn photographs. We use advanced digital techniques to bring your cherished memories back to life.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question"><span>What is included in the wedding package?</span><i class="fas fa-plus"></i></button>
+                        <div class="faq-answer"><p>Our wedding packages include full-day coverage, 200+ professionally edited photos, a consultation session, and optional albums and prints. Custom packages are available.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question"><span>How long until I receive my photos?</span><i class="fas fa-plus"></i></button>
+                        <div class="faq-answer"><p>Portrait sessions: 5-7 business days. Weddings and events: 3-4 weeks. Rush delivery is available for an additional fee.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box">
+                    <h3>Join Our Inner Circle</h3>
+                    <p>Receive exclusive offers, photography tips, and first access to seasonal promotions.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <span class="section-eyebrow">Get in Touch</span>
+                        <h2>Let's Create <em>Something Beautiful</em></h2>
+                        <p>We'd love to hear from you. Schedule a free consultation to discuss your vision.</p>
+                        <div class="contact-details">
+                            <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Near Mastan Durga Center, Trunk Road, Ongole - 523 001, A.P.</span></div>
+                            <div class="contact-item"><i class="fas fa-phone"></i><span><a href="tel:+919849146903">98491 46 903</a> · <a href="tel:+918008510110">800 85 10 110</a></span></div>
+                            <div class="contact-item"><i class="fas fa-envelope"></i><span><a href="mailto:dvr.spandana@gmail.com">dvr.spandana@gmail.com</a></span></div>
+                        </div>
+                        <div class="contact-map" id="contact-map">
+                            <iframe src="" id="contact-map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Spandana Photo House - Ongole"></iframe>
+                        </div>
+                        <div class="contact-rating-cta" id="contact-rating-cta">
+                            <div class="contact-stars" id="contact-stars"></div>
+                            <span id="contact-rating-text">Loading ratings...</span>
+                        </div>
+                    </div>
+                    <form id="contact-form" class="contact-form">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-accent">SPANDANA</span>
+                    <span class="logo-main">PHOTO HOUSE</span>
+                    <p>Capturing life's precious moments. Near Mastan Durga Center, Trunk Road, Ongole - 523 001, A.P.</p>
+                    <div class="footer-rating" id="footer-rating">
+                        <span class="footer-stars" id="footer-stars"></span>
+                        <span id="footer-rating-text">Loading...</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#ratings">Ratings</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <a href="https://facebook.com/spandana-photo-house" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/spandana_photo_house" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/spandana_photo" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://pinterest.com/spandana_photo" target="_blank" rel="noopener" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Spandana Photo House. All Rights Reserved.</p>
+                <a href="admin.html" class="admin-link" target="_blank">Admin</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox with prev/next -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <img src="" alt="">
+        <span class="lightbox-counter" id="lightbox-counter"></span>
+    </div>
+
+    <!-- WhatsApp floating button -->
+    <a href="https://wa.me/919849146903" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp - 98491 46 903">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+    </a>
+
+    <!-- Search overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <button class="search-close" aria-label="Close search">&times;</button>
+        <div class="search-box">
+            <input type="search" id="site-search" placeholder="Search services, portfolio, FAQ...">
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="db.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

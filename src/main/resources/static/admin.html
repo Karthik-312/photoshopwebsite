@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Spandana Photo House</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .admin-page { padding: var(--space-xl); max-width: 1200px; margin: 0 auto; }
+        .admin-login { max-width: 400px; margin: 4rem auto; padding: var(--space-xl); background: var(--color-bg-card); border-radius: 4px; border: 1px solid var(--color-border); }
+        .admin-login h1 { margin-bottom: var(--space-lg); font-family: var(--font-display); }
+        .admin-login input { width: 100%; padding: 14px; margin-bottom: var(--space-md); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-text); }
+        .admin-login button { width: 100%; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md); }
+        .admin-tabs { display: flex; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+        .admin-tab { padding: 10px 20px; background: transparent; border: 1px solid var(--color-border); color: var(--color-text-muted); cursor: pointer; border-radius: 4px; }
+        .admin-tab.active { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
+        .admin-table { width: 100%; border-collapse: collapse; background: var(--color-bg-card); border-radius: 4px; overflow: hidden; }
+        .admin-table th, .admin-table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--color-border); }
+        .admin-table th { background: var(--color-bg-elevated); font-weight: 600; color: var(--color-text); }
+        .admin-table tr:hover { background: var(--color-bg-elevated); }
+        .admin-export { padding: 8px 16px; background: var(--color-accent); color: var(--color-bg); border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+        .admin-content { display: none; }
+        .admin-content.active { display: block; }
+        .admin-error { color: #ef4444; margin-top: var(--space-sm); }
+        .admin-empty { padding: var(--space-xl); text-align: center; color: var(--color-text-muted); }
+    </style>
+</head>
+<body>
+    <div class="admin-page">
+        <div id="admin-login" class="admin-login">
+            <h1>Admin Login</h1>
+            <input type="password" id="admin-password" placeholder="Enter admin password" autocomplete="current-password">
+            <button type="button" class="btn btn-primary" id="admin-login-btn">Login</button>
+            <p class="admin-error" id="admin-login-error"></p>
+        </div>
+
+        <div id="admin-dashboard" style="display:none">
+            <div class="admin-header">
+                <h1 style="font-family: var(--font-display);">Admin Dashboard</h1>
+                <button class="admin-export" id="export-csv"><i class="fas fa-download"></i> Export CSV</button>
+            </div>
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="ratings">Ratings</button>
+                <button class="admin-tab" data-tab="contacts">Contacts</button>
+                <button class="admin-tab" data-tab="bookings">Bookings</button>
+            </div>
+            <div id="admin-ratings" class="admin-content active">
+                <table class="admin-table" id="ratings-table">
+                    <thead><tr><th>Date</th><th>Stars</th><th>Name</th><th>Review</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <p class="admin-empty" id="ratings-empty" style="display:none">No ratings yet.</p>
+            </div>
+            <div id="admin-contacts" class="admin-content">
+                <table class="admin-table" id="contacts-table">
+                    <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Phone</th><th>Message</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <p class="admin-empty" id="contacts-empty" style="display:none">No contact submissions yet.</p>
+            </div>
+            <div id="admin-bookings" class="admin-content">
+                <table class="admin-table" id="bookings-table">
+                    <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Event</th><th>Package</th><th>Preferred Date</th><th>Notes</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <p class="admin-empty" id="bookings-empty" style="display:none">No bookings yet.</p>
+            </div>
+        </div>
+    </div>
+    <script src="config.js"></script>
+    <script>
+        const API_BASE = window.location.origin;
+        let adminPassword = '';
+
+        document.getElementById('admin-login-btn').addEventListener('click', async () => {
+            const input = document.getElementById('admin-password');
+            const err = document.getElementById('admin-login-error');
+            adminPassword = input.value || (typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.adminPassword : 'admin123');
+            err.textContent = '';
+            try {
+                const res = await fetch(API_BASE + '/api/admin/ratings', {
+                    headers: { 'X-Admin-Password': adminPassword }
+                });
+                if (res.status === 401) {
+                    err.textContent = 'Invalid password.';
+                    return;
+                }
+                sessionStorage.setItem('adminAuth', adminPassword);
+                document.getElementById('admin-login').style.display = 'none';
+                document.getElementById('admin-dashboard').style.display = 'block';
+                loadAll();
+            } catch (e) {
+                err.textContent = 'Could not connect. Is the server running?';
+            }
+        });
+
+        if (sessionStorage.getItem('adminAuth')) {
+            adminPassword = sessionStorage.getItem('adminAuth');
+            document.getElementById('admin-login').style.display = 'none';
+            document.getElementById('admin-dashboard').style.display = 'block';
+            loadAll();
+        }
+
+        const headers = () => ({ 'X-Admin-Password': adminPassword || sessionStorage.getItem('adminAuth') });
+
+        async function loadAll() {
+            await Promise.all([loadRatings(), loadContacts(), loadBookings()]);
+        }
+
+        async function loadRatings() {
+            try {
+                const res = await fetch(API_BASE + '/api/admin/ratings', { headers: headers() });
+                if (res.status === 401) { sessionStorage.removeItem('adminAuth'); location.reload(); return; }
+                const data = await res.json();
+                const tbody = document.querySelector('#ratings-table tbody');
+                const empty = document.getElementById('ratings-empty');
+                tbody.innerHTML = '';
+                if (data.length === 0) { empty.style.display = 'block'; return; }
+                empty.style.display = 'none';
+                data.forEach(r => {
+                    r.createdAt = new Date(r.createdAt).toLocaleString();
+                    tbody.innerHTML += `<tr><td>${r.createdAt}</td><td>${'★'.repeat(r.stars)}</td><td>${escapeHtml(r.clientName || '-')}</td><td>${escapeHtml(r.reviewText || '-')}</td></tr>`;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        async function loadContacts() {
+            try {
+                const res = await fetch(API_BASE + '/api/admin/contacts', { headers: headers() });
+                if (res.status === 401) { sessionStorage.removeItem('adminAuth'); location.reload(); return; }
+                const data = await res.json();
+                const tbody = document.querySelector('#contacts-table tbody');
+                const empty = document.getElementById('contacts-empty');
+                tbody.innerHTML = '';
+                if (data.length === 0) { empty.style.display = 'block'; return; }
+                empty.style.display = 'none';
+                data.forEach(c => {
+                    c.createdAt = new Date(c.createdAt).toLocaleString();
+                    tbody.innerHTML += `<tr><td>${c.createdAt}</td><td>${escapeHtml(c.name)}</td><td>${escapeHtml(c.email)}</td><td>${escapeHtml(c.phone || '-')}</td><td>${escapeHtml(c.message)}</td></tr>`;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        async function loadBookings() {
+            try {
+                const res = await fetch(API_BASE + '/api/admin/bookings', { headers: headers() });
+                if (res.status === 401) { sessionStorage.removeItem('adminAuth'); location.reload(); return; }
+                const data = await res.json();
+                const tbody = document.querySelector('#bookings-table tbody');
+                const empty = document.getElementById('bookings-empty');
+                tbody.innerHTML = '';
+                if (data.length === 0) { empty.style.display = 'block'; return; }
+                empty.style.display = 'none';
+                data.forEach(b => {
+                    b.createdAt = new Date(b.createdAt).toLocaleString();
+                    tbody.innerHTML += `<tr><td>${b.createdAt}</td><td>${escapeHtml(b.name)}</td><td>${escapeHtml(b.email)}</td><td>${escapeHtml(b.eventType)}</td><td>${escapeHtml(b.packageType || '-')}</td><td>${escapeHtml(b.preferredDate || '-')}</td><td>${escapeHtml(b.notes || '-')}</td></tr>`;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        function escapeHtml(s) {
+            const d = document.createElement('div');
+            d.textContent = s || '';
+            return d.innerHTML;
+        }
+
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('admin-' + tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        document.getElementById('export-csv').addEventListener('click', () => {
+            const active = document.querySelector('.admin-tab.active').dataset.tab;
+            const table = document.querySelector('#' + active + '-table');
+            if (!table) return;
+            const rows = table.querySelectorAll('tr');
+            let csv = [];
+            rows.forEach(r => {
+                csv.push([...r.querySelectorAll('th,td')].map(c => '"' + (c.textContent || '').replace(/"/g, '""') + '"').join(','));
+            });
+            const a = document.createElement('a');
+            a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv.join('\n'));
+            a.download = active + '-export.csv';
+            a.click();
+        });
+    </script>
+</body>
+</html>

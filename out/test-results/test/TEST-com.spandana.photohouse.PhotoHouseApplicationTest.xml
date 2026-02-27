@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spandana.photohouse.PhotoHouseApplicationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-27T06:00:08" hostname="KARTHIKEYASPC" time="1.195">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.spandana.photohouse.PhotoHouseApplicationTest" time="1.195"/>
+  <system-out><![CDATA[11:29:49.574 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.spandana.photohouse.PhotoHouseApplicationTest]: PhotoHouseApplicationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:29:50.002 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.spandana.photohouse.PhotoHouseApplication for test class com.spandana.photohouse.PhotoHouseApplicationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-02-27T11:29:51.134+05:30  INFO 23480 --- [    Test worker] c.s.p.PhotoHouseApplicationTest          : Starting PhotoHouseApplicationTest using Java 19.0.1 with PID 23480 (started by daggu in C:\Users\daggu\OneDrive\Desktop\photo shop website)
+2026-02-27T11:29:51.138+05:30  INFO 23480 --- [    Test worker] c.s.p.PhotoHouseApplicationTest          : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T11:29:54.151+05:30  INFO 23480 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T11:29:54.364+05:30  INFO 23480 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 177 ms. Found 3 JPA repository interfaces.
+2026-02-27T11:29:56.395+05:30  INFO 23480 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T11:29:56.654+05:30  INFO 23480 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2026-02-27T11:29:56.807+05:30  INFO 23480 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T11:29:58.380+05:30  INFO 23480 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T11:29:58.537+05:30  INFO 23480 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-27T11:29:59.423+05:30  INFO 23480 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-02-27T11:29:59.430+05:30  INFO 23480 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-27T11:30:03.348+05:30  INFO 23480 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T11:30:03.504+05:30  INFO 23480 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T11:30:05.019+05:30  INFO 23480 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T11:30:07.116+05:30  WARN 23480 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T11:30:07.202+05:30  INFO 23480 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-27T11:30:08.375+05:30  INFO 23480 --- [    Test worker] c.s.p.PhotoHouseApplicationTest          : Started PhotoHouseApplicationTest in 17.909 seconds (process running for 21.714)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

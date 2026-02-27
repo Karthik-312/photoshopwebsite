@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spandana.photohouse.controller.BookingControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-02-27T06:00:14" hostname="KARTHIKEYASPC" time="0.197">
+  <properties/>
+  <testcase name="submitBooking_invalidDate_ignoresDateAndSucceeds()" classname="com.spandana.photohouse.controller.BookingControllerTest" time="0.072"/>
+  <testcase name="submitBooking_missingName_returnsBadRequest()" classname="com.spandana.photohouse.controller.BookingControllerTest" time="0.013"/>
+  <testcase name="submitBooking_minimalPayload_returnsSuccess()" classname="com.spandana.photohouse.controller.BookingControllerTest" time="0.009"/>
+  <testcase name="submitBooking_missingEventType_returnsBadRequest()" classname="com.spandana.photohouse.controller.BookingControllerTest" time="0.013"/>
+  <testcase name="submitBooking_missingEmail_returnsBadRequest()" classname="com.spandana.photohouse.controller.BookingControllerTest" time="0.014"/>
+  <testcase name="submitBooking_validPayload_returnsSuccess()" classname="com.spandana.photohouse.controller.BookingControllerTest" time="0.059"/>
+  <system-out><![CDATA[2026-02-27T11:30:13.181+05:30  INFO 23480 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.spandana.photohouse.controller.BookingControllerTest]: BookingControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-27T11:30:13.227+05:30  INFO 23480 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.spandana.photohouse.PhotoHouseApplication for test class com.spandana.photohouse.controller.BookingControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-02-27T11:30:13.348+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.BookingControllerTest   : Starting BookingControllerTest using Java 19.0.1 with PID 23480 (started by daggu in C:\Users\daggu\OneDrive\Desktop\photo shop website)
+2026-02-27T11:30:13.348+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.BookingControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T11:30:13.844+05:30  INFO 23480 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-27T11:30:13.980+05:30  INFO 23480 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-27T11:30:13.980+05:30  INFO 23480 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-27T11:30:13.982+05:30  INFO 23480 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-02-27T11:30:13.997+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.BookingControllerTest   : Started BookingControllerTest in 0.759 seconds (process running for 27.336)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

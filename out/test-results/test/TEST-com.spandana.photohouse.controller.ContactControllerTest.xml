@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spandana.photohouse.controller.ContactControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-02-27T06:00:14" hostname="KARTHIKEYASPC" time="0.088">
+  <properties/>
+  <testcase name="submitContact_missingName_returnsBadRequest()" classname="com.spandana.photohouse.controller.ContactControllerTest" time="0.016"/>
+  <testcase name="submitContact_blankName_returnsBadRequest()" classname="com.spandana.photohouse.controller.ContactControllerTest" time="0.009"/>
+  <testcase name="submitContact_emptyPhone_usesDefault()" classname="com.spandana.photohouse.controller.ContactControllerTest" time="0.014"/>
+  <testcase name="submitContact_missingMessage_returnsBadRequest()" classname="com.spandana.photohouse.controller.ContactControllerTest" time="0.012"/>
+  <testcase name="submitContact_missingEmail_returnsBadRequest()" classname="com.spandana.photohouse.controller.ContactControllerTest" time="0.012"/>
+  <testcase name="submitContact_validPayload_returnsSuccess()" classname="com.spandana.photohouse.controller.ContactControllerTest" time="0.009"/>
+  <system-out><![CDATA[2026-02-27T11:30:14.210+05:30  INFO 23480 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.spandana.photohouse.controller.ContactControllerTest]: ContactControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-27T11:30:14.237+05:30  INFO 23480 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.spandana.photohouse.PhotoHouseApplication for test class com.spandana.photohouse.controller.ContactControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-02-27T11:30:14.302+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.ContactControllerTest   : Starting ContactControllerTest using Java 19.0.1 with PID 23480 (started by daggu in C:\Users\daggu\OneDrive\Desktop\photo shop website)
+2026-02-27T11:30:14.303+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.ContactControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T11:30:14.691+05:30  INFO 23480 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-27T11:30:14.803+05:30  INFO 23480 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-27T11:30:14.804+05:30  INFO 23480 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-27T11:30:14.807+05:30  INFO 23480 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2026-02-27T11:30:14.815+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.ContactControllerTest   : Started ContactControllerTest in 0.569 seconds (process running for 28.154)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

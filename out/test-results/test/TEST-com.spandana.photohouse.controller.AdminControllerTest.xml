@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spandana.photohouse.controller.AdminControllerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-02-27T06:00:12" hostname="KARTHIKEYASPC" time="0.987">
+  <properties/>
+  <testcase name="getContacts_withCorrectPassword_returnsContacts()" classname="com.spandana.photohouse.controller.AdminControllerTest" time="0.853"/>
+  <testcase name="getRatings_withWrongPassword_returns401()" classname="com.spandana.photohouse.controller.AdminControllerTest" time="0.019"/>
+  <testcase name="getBookings_withoutAuth_returns401()" classname="com.spandana.photohouse.controller.AdminControllerTest" time="0.01"/>
+  <testcase name="getBookings_withCorrectPassword_returnsBookings()" classname="com.spandana.photohouse.controller.AdminControllerTest" time="0.019"/>
+  <testcase name="getRatings_withCorrectPassword_returnsRatings()" classname="com.spandana.photohouse.controller.AdminControllerTest" time="0.019"/>
+  <testcase name="getContacts_withoutAuth_returns401()" classname="com.spandana.photohouse.controller.AdminControllerTest" time="0.015"/>
+  <testcase name="getRatings_withoutAuth_returns401()" classname="com.spandana.photohouse.controller.AdminControllerTest" time="0.012"/>
+  <system-out><![CDATA[2026-02-27T11:30:09.644+05:30  INFO 23480 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.spandana.photohouse.controller.AdminControllerTest]: AdminControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-27T11:30:09.920+05:30  INFO 23480 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.spandana.photohouse.PhotoHouseApplication for test class com.spandana.photohouse.controller.AdminControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-02-27T11:30:10.020+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.AdminControllerTest     : Starting AdminControllerTest using Java 19.0.1 with PID 23480 (started by daggu in C:\Users\daggu\OneDrive\Desktop\photo shop website)
+2026-02-27T11:30:10.021+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.AdminControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T11:30:11.783+05:30  INFO 23480 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-27T11:30:12.082+05:30  INFO 23480 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-27T11:30:12.083+05:30  INFO 23480 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-27T11:30:12.092+05:30  INFO 23480 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2026-02-27T11:30:12.129+05:30  INFO 23480 --- [    Test worker] c.s.p.controller.AdminControllerTest     : Started AdminControllerTest in 2.192 seconds (process running for 25.468)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
