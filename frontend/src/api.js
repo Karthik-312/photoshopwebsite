@@ -63,6 +63,54 @@ export async function submitBooking(data) {
   }
 }
 
+// Google Reviews
+export async function fetchGoogleReviews() {
+  try {
+    const res = await fetch(`${API_BASE}/api/google-reviews`)
+    if (!res.ok) return { reviews: [], configured: false }
+    return res.json()
+  } catch (e) {
+    return { reviews: [], configured: false }
+  }
+}
+
+// Payment
+export async function fetchPaymentConfig() {
+  try {
+    const res = await fetch(`${API_BASE}/api/payment/config`)
+    if (!res.ok) return { enabled: false }
+    return res.json()
+  } catch (e) {
+    return { enabled: false }
+  }
+}
+
+export async function createPaymentOrder(bookingData) {
+  try {
+    const res = await fetch(`${API_BASE}/api/payment/create-order`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(bookingData),
+    })
+    return res.json()
+  } catch (e) {
+    return { error: 'Payment service unavailable' }
+  }
+}
+
+export async function verifyPayment(data) {
+  try {
+    const res = await fetch(`${API_BASE}/api/payment/verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    return res.json()
+  } catch (e) {
+    return { success: false, error: 'Verification failed' }
+  }
+}
+
 // Admin API - requires X-Admin-Password header
 function adminHeaders(password) {
   return { 'X-Admin-Password': password || '' }

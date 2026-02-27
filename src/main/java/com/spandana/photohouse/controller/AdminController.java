@@ -73,16 +73,20 @@ public class AdminController {
             return ResponseEntity.status(401).body(Map.of("error", "Unauthorized"));
         }
         List<Booking> list = bookingRepository.findAllByOrderByCreatedAtDesc();
-        return ResponseEntity.ok(list.stream().map(b -> Map.of(
-            "id", b.getId(),
-            "name", b.getName(),
-            "email", b.getEmail(),
-            "phone", b.getPhone() != null ? b.getPhone() : "",
-            "eventType", b.getEventType(),
-            "packageType", b.getPackageType() != null ? b.getPackageType() : "",
-            "preferredDate", b.getPreferredDate() != null ? b.getPreferredDate().toString() : "",
-            "notes", b.getNotes() != null ? b.getNotes() : "",
-            "createdAt", b.getCreatedAt().toString()
-        )).collect(Collectors.toList()));
+        return ResponseEntity.ok(list.stream().map(b -> {
+            Map<String, Object> m = new java.util.LinkedHashMap<>();
+            m.put("id", b.getId());
+            m.put("name", b.getName());
+            m.put("email", b.getEmail());
+            m.put("phone", b.getPhone() != null ? b.getPhone() : "");
+            m.put("eventType", b.getEventType());
+            m.put("packageType", b.getPackageType() != null ? b.getPackageType() : "");
+            m.put("preferredDate", b.getPreferredDate() != null ? b.getPreferredDate().toString() : "");
+            m.put("notes", b.getNotes() != null ? b.getNotes() : "");
+            m.put("paymentStatus", b.getPaymentStatus() != null ? b.getPaymentStatus() : "NONE");
+            m.put("razorpayPaymentId", b.getRazorpayPaymentId() != null ? b.getRazorpayPaymentId() : "");
+            m.put("createdAt", b.getCreatedAt().toString());
+            return m;
+        }).collect(Collectors.toList()));
     }
 }
