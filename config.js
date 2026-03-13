@@ -47,15 +47,15 @@ const isConfigValid = () => {
 // Social & Contact Links - Spandana Photo House (Ongole, A.P.)
 const SITE_CONFIG = {
     studioName: 'Spandana Photo House',
-    phone1: '9849146903',               // D. VenkataRao - Artist & Photographer
-    phone2: '8008510110',               // D.S. Jyothi Kumar
-    whatsapp: '919849146903',           // Country code + number, no + or spaces
+    phone1: '8121046903',
+    phone2: '8121046903',
+    whatsapp: '918121046903',           // Country code + number, no + or spaces
     email: 'dvr.spandana@gmail.com',
     address: 'Near Mastan Durga Center, Trunk Road, Ongole - 523 001, A.P.',
     facebook: 'https://facebook.com/spandana-photo-house',
     instagram: 'https://instagram.com/spandana_photo_house',
     twitter: 'https://twitter.com/spandana_photo',
     pinterest: 'https://pinterest.com/spandana_photo',
-    googleMapsEmbed: 'https://maps.google.com/maps?q=Ongole,+Andhra+Pradesh&t=&z=14&ie=UTF8&iwloc=&output=embed',  // Ongole, A.P. - update with exact Mastan Durga Center location when available
+    googleMapsEmbed: 'https://maps.google.com/maps?q=15.5056421,80.0498062&z=17&output=embed',  // Spandana Photo House - exact coordinates
     adminPassword: 'admin123'           // Change for production!
 };
